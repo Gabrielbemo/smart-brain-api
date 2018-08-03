@@ -1,17 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt-nodejs');
+const cors = require('cors');
 
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 const database = {
     users: [
         {
-            id: '123',
-            name: 'Jhon',
-            email: 'jon@gmail.com',
-            password: 'cookies',
+            id: '124',
+            name: 'sohon',
+            email: 'jonssaa@gmail.com',
+            password: 'bananas',
             entries: 0,
             joined: new Date()
         },
@@ -33,7 +36,7 @@ app.get('/', (req, res) => {
 app.post('/signin', (req, res) => {
     if (req.body.email === database.users[0].email &&
         req.body.password === database.users[0].password) {
-        res.json('success');
+        res.json(database.users[0]);
     } else {
         res.status(400).json('erro no login')
     }
@@ -46,7 +49,6 @@ app.post('/register', (req, res) => {
         id: '125',
         name: name,
         email: email,
-        password: password,
         entries: 0,
         joined: new Date()
 
